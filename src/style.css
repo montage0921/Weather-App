@@ -1,1 +1,257 @@
+body {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  background-image: linear-gradient(#0081c9, #5bc0f8, #86e5ff);
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
+  --grey-font-color: #f5f4f4;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+#title {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2.5rem;
+}
+
+form {
+  position: absolute;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  width: 40%;
+  height: 50px;
+  background-color: rgb(255, 255, 255, 0.2);
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+input {
+  padding: 25px;
+  height: 100%;
+  width: 75%;
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  font-size: 20px;
+  color: white;
+}
+
+::placeholder {
+  color: grey;
+}
+
+.search-btn {
+  position: absolute;
+  right: 2%;
+  background-color: rgb(255, 255, 255, 0.2);
+  border: 0;
+  border-radius: 500px;
+  width: 35px;
+  height: 35px;
+  outline: 0;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn img {
+  width: 30px;
+  content: url(/src/assets/search.svg);
+  filter: invert(98%) sepia(6%) saturate(0%) hue-rotate(338deg) brightness(114%)
+    contrast(100%);
+}
+
+.weather-card {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 190px;
+
+  border-radius: 20px;
+  width: 450px;
+  height: 200px;
+
+  background-image: url(/src/assets/mist.jpg);
+  background-size: cover;
+
+  padding: 10px;
+
+  display: grid;
+  grid-template-rows: auto 1.5fr 1fr;
+}
+
+.toggle-1 {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  padding: 0;
+
+  appearance: none;
+  width: 60px;
+  height: 30px;
+  background: lightsalmon;
+
+  border-radius: 25px;
+}
+
+.toggle-1::before {
+  content: "";
+  background: lightgrey;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.5s;
+}
+
+.toggle-1:after {
+  content: "°C";
+  position: absolute;
+  font-size: 1rem;
+  color: white;
+  font-weight: 700;
+  top: 50%;
+  left: 55%;
+  transform: translate(0, -50%);
+  transition: all 0.5s;
+}
+
+.toggle-1:checked {
+  background-color: #5bc0f8;
+}
+
+.toggle-1:checked::before {
+  left: 65%;
+}
+
+.toggle-1:checked::after {
+  content: "°F";
+
+  top: 50%;
+  left: 25%;
+  transform: translate(0 -50%);
+  transition: all 0.5s;
+}
+
+.location {
+  justify-self: start;
+  font-size: 1rem;
+  display: flex;
+}
+
+.location img {
+  content: url(/src/assets/location.svg);
+  filter: invert(100%) sepia(0%) saturate(21%) hue-rotate(9deg) brightness(105%)
+    contrast(105%);
+
+  height: 20px;
+}
+
+.current-weather {
+  margin-top: 20px;
+  justify-self: start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+}
+
+.current-weather img {
+  padding-left: 20px;
+  grid-row: 1/3;
+  grid-column: 1/2;
+  content: url(/src/assets/sunny-test.svg);
+  align-self: center;
+}
+
+.current-weather .temp {
+  position: relative;
+  grid-row: 1/3;
+  grid-column: 2/3;
+  align-self: center;
+  font-weight: 500;
+  font-size: 3rem;
+
+  padding-right: 10px;
+}
+
+.temp .temp-unit {
+  position: absolute;
+  font-size: 1rem;
+}
+
+.current-weather .feels-condition {
+  padding-top: 10px;
+  grid-row: 1/3;
+  grid-column: 3/4;
+  align-self: center;
+  font-size: 1rem;
+}
+
+.current-weather .feels {
+  color: var(--grey-font-color);
+}
+
+.future-weather {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hourly-weather {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hourly-weather .time {
+  color: var(--grey-font-color);
+}
+
+.hourly-weather .weather-temp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hourly-weather .weather-temp .temp {
+  font-size: 1.5rem;
+}
+
+.hourly-weather .weather-temp .weather-symbol {
+  content: url(/src/assets/sunny-test.svg);
+  width: 30px;
+  height: auto;
+}
+
+.hourly-weather .feels {
+  color: var(--grey-font-color);
+}
