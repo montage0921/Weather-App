@@ -17,17 +17,20 @@
       </button>
     </form>
 
-    <div class="weather-card">
-      <input type="checkbox" name="" class="toggle-1">
+    <div class="weather-card    ">
       
-
       <div class="location">
         <img src="" alt="">
         <p>Willowdale East</p>
       </div>
 
+     <div class="update-time">
+      Updated at 8:31pm
+      <input type="checkbox" name="" class="toggle-1">
+     </div>
 
-      <div class="current-weather">
+
+      <div class="current-weather   ">
         <img src="" alt="" class="weather-symbol" />
         <p class="temp">3
           <span class="temp-unit">°C</span>
@@ -41,61 +44,113 @@
         
       </div>
 
-      <div class="future-weather">
-
-        <div class="hourly-weather">
-          <p class="time">2pm</p>
-          <div class="weather-temp">
-            <img class="weather-symbol"></img>
-            <p class="temp">3
-              <span>°</span>
-            </p>
-          </div>
-          <p class="feels">Feels 0</p>
+      <div class="detailed-weather hidden  ">
+        <div class="wind">
+          <p class="value">11 <span>km/h</span></p>
+          <p class="name">WIND</p>
         </div>
 
-        <div class="hourly-weather">
-          <p class="time">2pm</p>
-          <div class="weather-temp">
-            <img class="weather-symbol"></img>
-            <p class="temp">3
-              <span>°</span>
-            </p>
-          </div>
-        
-          <p class="feels">Feels 0</p>
+        <div class="gust">
+          <p class="value" >33 <span>km/h</span></p>
+          <p class="name">WIND GUST</p>
         </div>
 
-        <div class="hourly-weather">
-          <p class="time">2pm</p>
-          <div class="weather-temp">
-            <img class="weather-symbol"></img>
-            <p class="temp">3
-              <span>°</span>
-            </p>
-          </div>
-        
-          <p class="feels">Feels 0</p>
+        <div class="humidity">
+          <p class="value">93 <span>%</span></p>
+          <p class="name">HUMIDITY</p>
         </div>
-
-        <div class="hourly-weather">
-          <p class="time">2pm</p>
-          <div class="weather-temp">
-            <img class="weather-symbol"></img>
-            <p class="temp">3
-              <span>°</span>
-            </p>
-          </div>
-        
-          <p class="feels">Feels 0</p>
-        </div>
-
-       
-
-        
-
-       
       </div>
+
+<!--Future Weather Unexpand-->
+      <div class="future-weather  ">
+        <div class="hourly-weather 1">
+          <p class="time">2pm</p>
+          <div class="weather-temp">
+            <img class="weather-symbol"></img>
+            <p class="temp">3
+              <span>°</span>
+            </p>
+          </div>
+          <p class="feels">Feels 0</p>
+        </div>
+
+        <div class="hourly-weather 2">
+          <p class="time">2pm</p>
+          <div class="weather-temp">
+            <img class="weather-symbol"></img>
+            <p class="temp">3
+              <span>°</span>
+            </p>
+          </div>
+        
+          <p class="feels">Feels 0</p>
+        </div>
+
+        <div class="hourly-weather 3">
+          <p class="time">2pm</p>
+          <div class="weather-temp">
+            <img class="weather-symbol"></img>
+            <p class="temp">3
+              <span>°</span>
+            </p>
+          </div>
+        
+          <p class="feels">Feels 0</p>
+        </div>
+
+        <div class="hourly-weather 4">
+          <p class="time">2pm</p>
+          <div class="weather-temp">
+            <img class="weather-symbol"></img>
+            <p class="temp">3
+              <span>°</span>
+            </p>
+          </div>
+        
+          <p class="feels">Feels 0</p>
+        </div>
+      </div>
+    <!--Future Weather Unexpand-->
+  
+
+ <!--Future Weather TABLE-->
+      <div class="future-weather-table hidden 
+    ">
+        <div class="1">
+          <p class="time">10pm</p>
+          <img class="symbol"></img>
+          <p class="temp">0 <span>°</span></p>
+          <p class="description">Mainly Cloudy</p>
+        </div>
+
+        <div class="2">
+          <p class="time">10pm</p>
+          <img class="symbol"></i>
+          <p class="temp">0 <span>°</span></p>
+          <p class="description">Mainly Cloudy</p>
+        </div>
+
+        <div class="3">
+          <p class="time">10pm</p>
+          <img class="symbol"></img>
+          <p class="temp">0 <span>°</span></p>
+          <p class="description">Mainly Cloudy</p>
+        </div>
+
+        <div class="4">
+          <p class="time">10pm</p>
+          <img class="symbol"></img>
+          <p class="temp">0 <span>°</span></p>
+          <p class="description">Mainly Cloudy</p>
+        </div>
+
+      </div>
+       <!--Future Weather TABLE-->
+
+       <div class="expandBtn hidden">
+        <img class="toggle" src="" alt="">
+       </div>
+
     </div>
   </body>
 </html>
