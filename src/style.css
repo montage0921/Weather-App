@@ -99,7 +99,7 @@ input {
   width: 450px;
   height: 200px;
 
-  background-image: url(/src/assets/mist.jpg);
+  background-image: url(/src/assets/clear-sky-day.jpg);
   background-size: cover;
 
   padding: 10px;
@@ -345,7 +345,7 @@ input {
 
 .expandBtn {
   position: absolute;
-  top: 35%;
+  top: 23%;
   right: -1%;
 
   width: 50px;
