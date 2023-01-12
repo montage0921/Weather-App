@@ -108,6 +108,7 @@ input {
   grid-template-rows: auto 1.5fr 1fr;
 
   overflow: hidden;
+  transition: all ease-in-out 0.3s;
 }
 
 .update-time {
@@ -345,7 +346,7 @@ input {
 
 .expandBtn {
   position: absolute;
-  top: 23%;
+  top: 30%;
   right: -1%;
 
   width: 50px;
@@ -363,6 +364,10 @@ input {
   transform: rotate(-180deg);
 }
 
-.expandBtn.hidden {
-  display: none;
+.expandBtn.expand {
+  position: absolute;
+  top: 20%;
+  right: -1%;
+
+  width: 50px;
 }
