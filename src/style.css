@@ -86,6 +86,25 @@ input {
     contrast(100%);
 }
 
+.error-card {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 190px;
+  text-align: center;
+}
+
+.error-card img {
+  content: url(/src/assets/404.png);
+  zoom: 50%;
+}
+
+.error-card.hidden {
+  display: none;
+}
+
 .weather-card {
   position: absolute;
   margin-left: auto;
