@@ -29,6 +29,6 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "node-geocoder": "^4.2.0"
+    "date-fns": "^2.29.3"
   }
 }
