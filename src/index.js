@@ -18,11 +18,7 @@ searchBtn.addEventListener(`click`, function (e) {
 
   const futureWeatherPro = getFutureWeather(city);
 
-  const geoCodePro = getGeoAPIData(city);
-
-  const timeZonePro = getTimeZoneAPI(geoCodePro, futureWeatherPro);
-
-  getFutureHour(timeZonePro);
+  const futureHourPro = getFutureHour(city);
 });
 
 ////////////////////Async function//////////
@@ -70,11 +66,15 @@ async function getGeoAPIData(city) {
 }
 
 //4. get time zone of the city from api
-async function getTimeZoneAPI(geoCodePromise, futureWeather) {
-  const futureWeatherData = await futureWeather;
+async function getTimeZoneAPI(city) {
+  const geoCodePro = await getGeoAPIData(city);
+  const futureWeatherPro = await getFutureWeather(city);
+
+  const { lat, lng } = await geoCodePro;
+
+  const futureWeatherData = await futureWeatherPro;
 
   const timeEpoch = futureWeatherData[0].time_epoch;
-  const { lat, lng } = await geoCodePromise;
 
   const responseTimeZone = await fetch(
     `https://maps.googleapis.com/maps/api/timezone/json?location=${lat}%2C${lng}&timestamp=${timeEpoch}&key=AIzaSyCTnMU5cLNYyQJ93XqxsQf3DZVlnu5RJcE`
@@ -85,7 +85,9 @@ async function getTimeZoneAPI(geoCodePromise, futureWeather) {
   return timeZone;
 }
 
-async function getFutureHour(timeZonePro) {
+//5. get futureHour
+async function getFutureHour(city) {
+  const timeZonePro = getTimeZoneAPI(city);
   const timeZone = await timeZonePro;
 
   let date = new Date();
@@ -111,5 +113,6 @@ async function getFutureHour(timeZonePro) {
     }
   }
 
+  console.log(futureHours);
   return futureHours;
 }
