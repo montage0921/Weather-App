@@ -19,6 +19,8 @@ searchBtn.addEventListener(`click`, function (e) {
   const futureWeatherPro = getFutureWeather(city);
 
   const futureHourPro = getFutureHour(city);
+
+  const curWeatherObjPro = handleCurWeatherData(currentWeatherPro);
 });
 
 ////////////////////Async function//////////
@@ -113,6 +115,33 @@ async function getFutureHour(city) {
     }
   }
 
-  console.log(futureHours);
   return futureHours;
+}
+
+//handle weather data
+
+async function handleCurWeatherData(current) {
+  const currentData = await current;
+
+  const updateTime = getUpdateTime();
+  console.log(currentData);
+
+  const currentObj = {};
+
+  currentObj.currentTemp = Math.round(currentData.current.temp_c);
+  currentObj.feelsLike = Math.round(currentData.current.feelslike_c);
+  currentObj.icon = currentData.current.condition.icon;
+  currentObj.weather = currentData.current.condition.text;
+
+  return currentObj;
+}
+
+function getUpdateTime() {
+  const date = new Date();
+
+  //get update time
+  const hour = date.getHours();
+  const min = date.getMinutes();
+  const updateTime = hour + ":" + min;
+  return updateTime;
 }
