@@ -118,7 +118,7 @@ input {
   width: 450px;
   height: 200px;
 
-  background-image: url(/src/assets/clear-sky-day.jpg);
+  background-image: url();
   background-size: cover;
 
   padding: 10px;
@@ -217,6 +217,7 @@ input {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
+  gap: 8px;
 }
 
 .current-weather.expand {
