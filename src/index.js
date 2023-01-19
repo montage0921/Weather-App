@@ -139,13 +139,23 @@ async function handleCurWeatherData(current) {
   currentObj.gust = Math.round(currentData.current.gust_kph);
   currentObj.humidity = currentData.current.humidity;
 
-  console.log(currentObj);
-
   return currentObj;
 }
 
 async function handleFutureWeatherData(future) {
   const futureData = await future;
+  console.log(futureData[0].condition.icon);
+  const futureArr = [];
+  for (let i = 0; i < 4; i++) {
+    futureArr.push({
+      icon: futureData[i].condition.icon,
+      weather: futureData[i].condition.text,
+      temperature: Math.round(futureData[i].temp_c),
+      feels_like: Math.round(futureData[i].feelslike_c),
+    });
+  }
+
+  return futureArr;
 }
 
 function getUpdateTime() {
