@@ -309,9 +309,19 @@ async function renderWeatherCard(current, future, futureHours) {
     `;
 
     weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `hidden`;
     weatherCard.insertAdjacentHTML(`beforeend`, htmlText);
   } catch (error) {
-    console.log(error);
+    let htmlTextError = ` <div class="error-card ">
+    <img src="" alt="" />
+    <h2>A mystery land is waiting us to explore...</h2>
+    <h2>Please try again</h2>
+  </div>`;
+
+    weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `visible`;
+
+    weatherCard.insertAdjacentHTML(`beforeend`, htmlTextError);
   }
 }
 

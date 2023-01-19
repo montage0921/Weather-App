@@ -87,22 +87,17 @@ input {
 }
 
 .error-card {
-  position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  margin-top: 190px;
+
   text-align: center;
 }
 
 .error-card img {
   content: url(/src/assets/404.png);
   zoom: 50%;
-}
-
-.error-card.hidden {
-  display: none;
 }
 
 .weather-card {
@@ -125,9 +120,12 @@ input {
 
   display: grid;
   grid-template-rows: auto 1.5fr 1fr;
-
   overflow: hidden;
   transition: all ease-in-out 0.3s;
+}
+
+.weather-card.hidden {
+  display: none;
 }
 
 .update-time {
