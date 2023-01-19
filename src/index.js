@@ -311,6 +311,9 @@ async function renderWeatherCard(current, future, futureHours) {
     weatherCard.innerHTML = ``;
     weatherCard.style.overflow = `hidden`;
     weatherCard.insertAdjacentHTML(`beforeend`, htmlText);
+
+    const currentIcon = document.querySelector(`.current-weather img`);
+    currentIcon.style.content = `url(${currentObj.icon})`;
   } catch (error) {
     let htmlTextError = ` <div class="error-card ">
     <img src="" alt="" />
