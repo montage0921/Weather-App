@@ -21,6 +21,8 @@ searchBtn.addEventListener(`click`, function (e) {
   const futureHourPro = getFutureHour(city);
 
   const curWeatherObjPro = handleCurWeatherData(currentWeatherPro);
+
+  const futureWeatherObjPro = handleFutureWeatherData(futureWeatherPro);
 });
 
 ////////////////////Async function//////////
@@ -124,24 +126,36 @@ async function handleCurWeatherData(current) {
   const currentData = await current;
 
   const updateTime = getUpdateTime();
-  console.log(currentData);
 
   const currentObj = {};
 
+  currentObj.updateTime = updateTime;
   currentObj.currentTemp = Math.round(currentData.current.temp_c);
   currentObj.feelsLike = Math.round(currentData.current.feelslike_c);
   currentObj.icon = currentData.current.condition.icon;
+  currentObj.code = currentData.current.condition.code;
   currentObj.weather = currentData.current.condition.text;
+  currentObj.wind = Math.round(currentData.current.wind_kph);
+  currentObj.gust = Math.round(currentData.current.gust_kph);
+  currentObj.humidity = currentData.current.humidity;
+
+  console.log(currentObj);
 
   return currentObj;
+}
+
+async function handleFutureWeatherData(future) {
+  const futureData = await future;
 }
 
 function getUpdateTime() {
   const date = new Date();
 
   //get update time
-  const hour = date.getHours();
-  const min = date.getMinutes();
+  const hour = date.getHours() < 10 ? `0` + date.getHours() : date.getHours();
+  const min =
+    date.getMinutes() < 10 ? `0` + date.getMinutes() : date.getMinutes();
+
   const updateTime = hour + ":" + min;
   return updateTime;
 }
