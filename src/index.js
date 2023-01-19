@@ -270,28 +270,28 @@ async function renderWeatherCard(current, future, futureHours) {
   
     <div class="future-weather-table  hidden 
   ">
-      <div class="1">
+      <div class="hourly-weather 1">
         <p class="time">${futureHoursArr[0]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[0].temperature} <span>°</span></p>
         <p class="description">${futureArr[0].weather} </p>
       </div>
   
-      <div class="2">
+      <div class="hourly-weather 2">
         <p class="time">${futureHoursArr[1]}</p>
         <img class="symbol"></i>
         <p class="temp">${futureArr[1].temperature} <span>°</span></p>
         <p class="description">${futureArr[1].weather} </p>
       </div>
   
-      <div class="3">
+      <div class="hourly-weather 3">
         <p class="time">${futureHoursArr[2]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[2].temperature} <span>°</span></p>
         <p class="description">${futureArr[2].weather} </p>
       </div>
   
-      <div class="4">
+      <div class="hourly-weather 4">
         <p class="time">${futureHoursArr[3]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[3].temperature} <span>°</span></p>
@@ -314,6 +314,22 @@ async function renderWeatherCard(current, future, futureHours) {
 
     const currentIcon = document.querySelector(`.current-weather img`);
     currentIcon.style.content = `url(${currentObj.icon})`;
+
+    const futureIcons = document.querySelectorAll(
+      `.future-weather .hourly-weather img`
+    );
+
+    futureIcons.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
+
+    const futureIconsTable = document.querySelectorAll(
+      `.future-weather-table .hourly-weather img`
+    );
+
+    futureIconsTable.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
   } catch (error) {
     let htmlTextError = ` <div class="error-card ">
     <img src="" alt="" />
