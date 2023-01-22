@@ -1,8 +1,6 @@
 import { getFutureHour } from ".";
 
-function renderBackgroundImg(code, weatherCard, time) {
-  weatherCard.style.backgroundImage = `none`;
-
+function renderBackgroundImg(code, weatherCard, time, feelsFont) {
   switch (code) {
     case 1000:
       weatherCard.style.backgroundImage = `url(/src/assets/clear-sky.jpg)`;
@@ -50,6 +48,8 @@ function renderBackgroundImg(code, weatherCard, time) {
     case 1183:
     case 1240:
       weatherCard.style.backgroundImage = `url(/src/assets/shower-rain.jpg)`;
+      weatherCard.style.color = `black`;
+
       break;
 
     case 1186:

@@ -11,8 +11,11 @@ searchBtn.addEventListener(`click`, function (e) {
   e.preventDefault();
 
   //validation
-  if (searchBar.validity.valueMissing)
+  if (searchBar.validity.valueMissing) {
     searchBar.setAttribute(`placeholder`, `Enter a city name!!!!`);
+
+    return;
+  }
 
   let city = searchBar.value;
 
@@ -27,6 +30,8 @@ searchBtn.addEventListener(`click`, function (e) {
   const futureWeatherObjPro = handleFutureWeatherData(futureWeatherPro);
 
   renderWeatherCard(curWeatherObjPro, futureWeatherObjPro, futureHourPro);
+
+  searchBar.value = ``;
 });
 
 ////////////////////Async function//////////
@@ -343,6 +348,7 @@ async function renderWeatherCard(current, future, futureHours) {
 
     weatherCard.innerHTML = ``;
     weatherCard.style.overflow = `visible`;
+    weatherCard.style.backgroundImage = `none`;
 
     weatherCard.insertAdjacentHTML(`beforeend`, htmlTextError);
   }
