@@ -1,4 +1,5 @@
 import "./style.css";
+import renderBackgroundImg from "./renderBackground";
 
 const searchBtn = document.querySelector(`.search-btn`);
 const searchBar = document.querySelector(`.search`);
@@ -93,7 +94,7 @@ async function getTimeZoneAPI(city) {
 }
 
 //5. get futureHour
-async function getFutureHour(city) {
+export async function getFutureHour(city) {
   const timeZonePro = getTimeZoneAPI(city);
   const timeZone = await timeZonePro;
 
@@ -102,6 +103,7 @@ async function getFutureHour(city) {
   let formatter = new Intl.DateTimeFormat([], options);
 
   let currentHour = Number(formatter.format(date).split(` `)[0]);
+
   let amOrPm = formatter.format(date).split(` `)[1];
 
   const futureHours = [];
@@ -330,6 +332,8 @@ async function renderWeatherCard(current, future, futureHours) {
     futureIconsTable.forEach(
       (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
     );
+
+    renderBackgroundImg(currentObj.code, weatherCard);
   } catch (error) {
     let htmlTextError = ` <div class="error-card ">
     <img src="" alt="" />
