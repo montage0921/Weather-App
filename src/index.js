@@ -36,9 +36,18 @@ searchBtn.addEventListener(`click`, function (e) {
 });
 
 weatherCard.addEventListener(`click`, function (e) {
+  const city = document.querySelector(`.location p`).textContent;
+
+  const weatherCard = document.querySelector(`.weather-card`);
+  const currentWeather = document.querySelector(`.current-weather`);
+  const detailedWeather = document.querySelector(`.detailed-weather`);
+  const futureWeather = document.querySelector(`.future-weather`);
+  const futureWeatherTable = document.querySelector(`.future-weather-table`);
+  const expandIcon = document.querySelector(`.expandBtn`);
+
   if (e.target.className === `toggle-1`) {
     const toggleBtn = e.target;
-    const city = document.querySelector(`.location p`).textContent;
+
     const currentWeatherPro = getCurrentWeather(city);
 
     const futureWeatherPro = getFutureWeather(city);
@@ -54,6 +63,25 @@ weatherCard.addEventListener(`click`, function (e) {
     } else if (!toggleBtn.checked) {
       renderWeatherCardC(curWeatherObjPro, futureWeatherObjPro, futureHourPro);
     }
+  }
+
+  if (e.target.className === `expand`) {
+    const expandBtn = e.target;
+    console.log(
+      weatherCard,
+      futureWeather,
+      currentWeather,
+      detailedWeather,
+      futureWeatherTable,
+      expandIcon
+    );
+
+    weatherCard.classList.toggle(`expand`);
+    currentWeather.classList.toggle(`expand`);
+    detailedWeather.classList.toggle(`hidden`);
+    futureWeather.classList.toggle(`hidden`);
+    futureWeatherTable.classList.toggle(`hidden`);
+    expandIcon.classList.toggle(`expand`);
   }
 });
 
@@ -217,21 +245,21 @@ async function renderWeatherCardC(current, future, futureHours) {
    </div>
   
   
-    <div class="current-weather    ">
+    <div class="current-weather">
       <img src="" alt="" class="weather-symbol" />
       <p class="temp">${currentObj.temp}
         <span class="temp-unit">°C</span>
       </p>
   
       <div class="feels-condition">
-        <p class="feels">Feels <span class="feel-temp"> ${currentObj.feelsLike} </spam></p>
+        <p class="feels">${currentObj.feelsLike} </p>
         <p class="weather-condition">${currentObj.weather}</p>
   
       </div>
       
     </div>
   
-    <div class="detailed-weather hidden    ">
+    <div class="detailed-weather hidden">
       <div class="wind">
         <p class="value">${currentObj.wind} <span>km/h</span></p>
         <p class="name">WIND</p>
@@ -249,7 +277,7 @@ async function renderWeatherCardC(current, future, futureHours) {
     </div>
   
   
-    <div class="future-weather    ">
+    <div class="future-weather ">
       <div class="hourly-weather 1">
         <p class="time">${futureHoursArr[0]}</p>
         <div class="weather-temp">
@@ -258,7 +286,7 @@ async function renderWeatherCardC(current, future, futureHours) {
             <span>°</span>
           </p>
         </div>
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[0].feelsLike} </span></p>
+        <p class="feels">Feels  ${futureArr[0].feelsLike} </span></p>
       </div>
   
       <div class="hourly-weather 2">
@@ -270,7 +298,7 @@ async function renderWeatherCardC(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[1].feelsLike} </span></p>
+        <p class="feels">Feels ${futureArr[1].feelsLike} </p>
       </div>
   
       <div class="hourly-weather 3">
@@ -282,7 +310,7 @@ async function renderWeatherCardC(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[2].feelsLike} </span></p>
+        <p class="feels">Feels ${futureArr[2].feelsLike}</p>
       </div>
   
       <div class="hourly-weather 4">
@@ -294,7 +322,7 @@ async function renderWeatherCardC(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[3].feelsLike} </span></p>
+        <p class="feels">Feels  ${futureArr[3].feelsLike} </p>
       </div>
     </div>
   
@@ -304,35 +332,35 @@ async function renderWeatherCardC(current, future, futureHours) {
         <p class="time">${futureHoursArr[0]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[0].temperature} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[0].weather}</span> </p>
+        <p class="description">${futureArr[0].weather} </p>
       </div>
   
       <div class="hourly-weather 2">
         <p class="time">${futureHoursArr[1]}</p>
         <img class="symbol"></i>
         <p class="temp">${futureArr[1].temperature} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[1].weather}</span> </p>
+        <p class="description">${futureArr[1].weather}</p>
       </div>
   
       <div class="hourly-weather 3">
         <p class="time">${futureHoursArr[2]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[2].temperature} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[2].weather}</span> </p>
+        <p class="description">${futureArr[2].weather}</p>
       </div>
   
       <div class="hourly-weather 4">
         <p class="time">${futureHoursArr[3]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[3].temperature} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[3].weather}</span> </p>
+        <p class="description">${futureArr[3].weather} </p>
       </div>
   
     </div>
    
   
-     <div class="expandBtn   ">
-      <img class="" class="" src="" alt="">
+     <div class="expandBtn">
+      <img class="expand" src="" alt="">
      </div>
   
 
@@ -410,21 +438,21 @@ async function renderWeatherCardF(current, future, futureHours) {
    </div>
   
   
-    <div class="current-weather    ">
+    <div class="current-weather ">
       <img src="" alt="" class="weather-symbol" />
       <p class="temp">${currentObj.tempF}
         <span class="temp-unit">°F</span>
       </p>
   
       <div class="feels-condition">
-        <p class="feels">Feels <span class="feel-temp"> ${currentObj.feelsLikeF} </spam></p>
+        <p class="feels">Feels ${currentObj.feelsLikeF} </p>
         <p class="weather-condition">${currentObj.weather}</p>
   
       </div>
       
     </div>
   
-    <div class="detailed-weather hidden    ">
+    <div class="detailed-weather hidden">
       <div class="wind">
         <p class="value">${currentObj.wind} <span>km/h</span></p>
         <p class="name">WIND</p>
@@ -442,7 +470,7 @@ async function renderWeatherCardF(current, future, futureHours) {
     </div>
   
   
-    <div class="future-weather    ">
+    <div class="future-weather">
       <div class="hourly-weather 1">
         <p class="time">${futureHoursArr[0]}</p>
         <div class="weather-temp">
@@ -451,7 +479,7 @@ async function renderWeatherCardF(current, future, futureHours) {
             <span>°</span>
           </p>
         </div>
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[0].feelsLikeF} </span></p>
+        <p class="feels">Feels ${futureArr[0].feelsLikeF}</p>
       </div>
   
       <div class="hourly-weather 2">
@@ -463,7 +491,7 @@ async function renderWeatherCardF(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[1].feelsLikeF} </span></p>
+        <p class="feels">Feels ${futureArr[1].feelsLikeF}</p>
       </div>
   
       <div class="hourly-weather 3">
@@ -475,7 +503,7 @@ async function renderWeatherCardF(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[2].feelsLikeF} </span></p>
+        <p class="feels">Feels ${futureArr[2].feelsLikeF}</p>
       </div>
   
       <div class="hourly-weather 4">
@@ -487,7 +515,7 @@ async function renderWeatherCardF(current, future, futureHours) {
           </p>
         </div>
       
-        <p class="feels">Feels <span class="feel-temp"> ${futureArr[3].feelsLikeF} </span></p>
+        <p class="feels">Feels ${futureArr[3].feelsLikeF}</p>
       </div>
     </div>
   
@@ -497,35 +525,35 @@ async function renderWeatherCardF(current, future, futureHours) {
         <p class="time">${futureHoursArr[0]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[0].temperatureF} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[0].weather}</span> </p>
+        <p class="description">${futureArr[0].weather} </p>
       </div>
   
       <div class="hourly-weather 2">
         <p class="time">${futureHoursArr[1]}</p>
         <img class="symbol"></i>
         <p class="temp">${futureArr[1].temperatureF} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[1].weather}</span> </p>
+        <p class="description">${futureArr[1].weather}</p>
       </div>
   
       <div class="hourly-weather 3">
         <p class="time">${futureHoursArr[2]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[2].temperatureF} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[2].weather}</span> </p>
+        <p class="description">${futureArr[2].weather} </p>
       </div>
   
       <div class="hourly-weather 4">
         <p class="time">${futureHoursArr[3]}</p>
         <img class="symbol"></img>
         <p class="temp">${futureArr[3].temperatureF} <span>°</span></p>
-        <p class="description"><span class="feel-temp">${futureArr[3].weather}</span> </p>
+        <p class="description">${futureArr[3].weather} </p>
       </div>
   
     </div>
    
   
-     <div class="expandBtn   ">
-      <img class="" class="" src="" alt="">
+     <div class="expandBtn">
+      <img class="expand" src="" alt="">
      </div>
   
 
