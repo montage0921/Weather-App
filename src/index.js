@@ -61,12 +61,14 @@ weatherCard.addEventListener(`click`, function (e) {
   if (e.target.classList.contains(`toggle-1`)) {
     if (weatherCard.classList.contains(`expand`)) {
       if (toggleBtn.checked) {
+        console.log(`expand!!!!!! check!!!!`);
         renderWeatherCardFExpand(
           curWeatherObjPro,
           futureWeatherObjPro,
           futureHourPro
         );
       } else if (!toggleBtn.checked) {
+        console.log(`expand!!!!!! no check!!!!`);
         renderWeatherCardCExpand(
           curWeatherObjPro,
           futureWeatherObjPro,
@@ -75,14 +77,12 @@ weatherCard.addEventListener(`click`, function (e) {
       }
     } else {
       if (toggleBtn.checked) {
-        console.log(`unexpand F!!!`);
         renderWeatherCardF(
           curWeatherObjPro,
           futureWeatherObjPro,
           futureHourPro
         );
       } else if (!toggleBtn.checked) {
-        console.log(`unexpand C!!!`);
         renderWeatherCardC(
           curWeatherObjPro,
           futureWeatherObjPro,
@@ -268,7 +268,7 @@ async function renderWeatherCardC(current, future, futureHours) {
       </p>
   
       <div class="feels-condition">
-        <p class="feels">${currentObj.feelsLike} </p>
+        <p class="feels">Feels ${currentObj.feelsLike} </p>
         <p class="weather-condition">${currentObj.weather}</p>
   
       </div>
@@ -812,7 +812,7 @@ async function renderWeatherCardCExpand(current, future, futureHours) {
   
    <div class="update-time">
     Updated at ${currentObj.updateTime}
-    <input type="checkbox" checked="false" name="" class="toggle-1">
+    <input type="checkbox" name="" class="toggle-1">
    </div>
   
   
