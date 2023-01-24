@@ -44,37 +44,54 @@ weatherCard.addEventListener(`click`, function (e) {
   const futureWeather = document.querySelector(`.future-weather`);
   const futureWeatherTable = document.querySelector(`.future-weather-table`);
   const expandIcon = document.querySelector(`.expandBtn`);
+  const expand = document.querySelector(`.expand`);
 
-  if (e.target.className === `toggle-1`) {
-    const toggleBtn = e.target;
+  const toggleBtn = e.target;
 
-    const currentWeatherPro = getCurrentWeather(city);
+  const currentWeatherPro = getCurrentWeather(city);
 
-    const futureWeatherPro = getFutureWeather(city);
+  const futureWeatherPro = getFutureWeather(city);
 
-    const futureHourPro = getFutureHour(city);
+  const futureHourPro = getFutureHour(city);
 
-    const curWeatherObjPro = handleCurWeatherData(currentWeatherPro);
+  const curWeatherObjPro = handleCurWeatherData(currentWeatherPro);
 
-    const futureWeatherObjPro = handleFutureWeatherData(futureWeatherPro);
+  const futureWeatherObjPro = handleFutureWeatherData(futureWeatherPro);
 
-    if (toggleBtn.checked) {
-      renderWeatherCardF(curWeatherObjPro, futureWeatherObjPro, futureHourPro);
-    } else if (!toggleBtn.checked) {
-      renderWeatherCardC(curWeatherObjPro, futureWeatherObjPro, futureHourPro);
+  if (e.target.classList.contains(`toggle-1`)) {
+    if (weatherCard.classList.contains(`expand`)) {
+      if (toggleBtn.checked) {
+        renderWeatherCardFExpand(
+          curWeatherObjPro,
+          futureWeatherObjPro,
+          futureHourPro
+        );
+      } else if (!toggleBtn.checked) {
+        renderWeatherCardCExpand(
+          curWeatherObjPro,
+          futureWeatherObjPro,
+          futureHourPro
+        );
+      }
+    } else {
+      if (toggleBtn.checked) {
+        console.log(`unexpand F!!!`);
+        renderWeatherCardF(
+          curWeatherObjPro,
+          futureWeatherObjPro,
+          futureHourPro
+        );
+      } else if (!toggleBtn.checked) {
+        console.log(`unexpand C!!!`);
+        renderWeatherCardC(
+          curWeatherObjPro,
+          futureWeatherObjPro,
+          futureHourPro
+        );
+      }
     }
-  }
-
-  if (e.target.className === `expand`) {
+  } else if (e.target.classList.contains(`expand`)) {
     const expandBtn = e.target;
-    console.log(
-      weatherCard,
-      futureWeather,
-      currentWeather,
-      detailedWeather,
-      futureWeatherTable,
-      expandIcon
-    );
 
     weatherCard.classList.toggle(`expand`);
     currentWeather.classList.toggle(`expand`);
@@ -82,6 +99,7 @@ weatherCard.addEventListener(`click`, function (e) {
     futureWeather.classList.toggle(`hidden`);
     futureWeatherTable.classList.toggle(`hidden`);
     expandIcon.classList.toggle(`expand`);
+    expand.classList.toggle(`toggle`);
   }
 });
 
@@ -232,8 +250,6 @@ async function renderWeatherCardC(current, future, futureHours) {
     const futureHoursArr = await futureHours;
 
     htmlText = `
-   
-        
     <div class="location">
       <img src="" alt="">
       <p>${currentObj.city}</p>
@@ -554,6 +570,368 @@ async function renderWeatherCardF(current, future, futureHours) {
   
      <div class="expandBtn">
       <img class="expand" src="" alt="">
+     </div>
+  
+
+    `;
+
+    weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `hidden`;
+    weatherCard.insertAdjacentHTML(`beforeend`, htmlText);
+
+    const currentIcon = document.querySelector(`.current-weather img`);
+    currentIcon.style.content = `url(${currentObj.icon})`;
+
+    const futureIcons = document.querySelectorAll(
+      `.future-weather .hourly-weather img`
+    );
+
+    futureIcons.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
+
+    const futureIconsTable = document.querySelectorAll(
+      `.future-weather-table .hourly-weather img`
+    );
+
+    futureIconsTable.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
+
+    renderBackgroundImg(currentObj.code, weatherCard);
+  } catch (error) {
+    let htmlTextError = ` <div class="error-card ">
+    <img src="" alt="" />
+    <h2>A mystery land is waiting us to explore...</h2>
+    <h2>Please try again</h2>
+  </div>`;
+
+    weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `visible`;
+    weatherCard.style.backgroundImage = `none`;
+
+    weatherCard.insertAdjacentHTML(`beforeend`, htmlTextError);
+  }
+}
+
+async function renderWeatherCardFExpand(current, future, futureHours) {
+  try {
+    let htmlText = ``;
+    const currentObj = await current;
+    const futureArr = await future;
+    const futureHoursArr = await futureHours;
+
+    htmlText = `
+   
+        
+    <div class="location">
+      <img src="" alt="">
+      <p>${currentObj.city}</p>
+    </div>
+  
+   <div class="update-time">
+    Updated at ${currentObj.updateTime}
+    <input type="checkbox" checked="false" name="" class="toggle-1">
+   </div>
+  
+  
+    <div class="current-weather expand">
+      <img src="" alt="" class="weather-symbol" />
+      <p class="temp">${currentObj.tempF}
+        <span class="temp-unit">°F</span>
+      </p>
+  
+      <div class="feels-condition">
+        <p class="feels">Feels ${currentObj.feelsLikeF} </p>
+        <p class="weather-condition">${currentObj.weather}</p>
+  
+      </div>
+      
+    </div>
+  
+    <div class="detailed-weather ">
+      <div class="wind">
+        <p class="value">${currentObj.wind} <span>km/h</span></p>
+        <p class="name">WIND</p>
+      </div>
+  
+      <div class="gust">
+        <p class="value" >${currentObj.gust} <span>km/h</span></p>
+        <p class="name">WIND GUST</p>
+      </div>
+  
+      <div class="humidity">
+        <p class="value">${currentObj.humidity} <span>%</span></p>
+        <p class="name">HUMIDITY</p>
+      </div>
+    </div>
+  
+  
+    <div class="future-weather hidden">
+      <div class="hourly-weather 1">
+        <p class="time">${futureHoursArr[0]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[0].temperatureF}
+            <span>°</span>
+          </p>
+        </div>
+        <p class="feels">Feels ${futureArr[0].feelsLikeF}</p>
+      </div>
+  
+      <div class="hourly-weather 2">
+        <p class="time">${futureHoursArr[1]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[1].temperatureF}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[1].feelsLikeF}</p>
+      </div>
+  
+      <div class="hourly-weather 3">
+        <p class="time">${futureHoursArr[2]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[2].temperatureF}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[2].feelsLikeF}</p>
+      </div>
+  
+      <div class="hourly-weather 4">
+        <p class="time">${futureHoursArr[3]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[3].temperatureF}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[3].feelsLikeF}</p>
+      </div>
+    </div>
+  
+    <div class="future-weather-table   
+  ">
+      <div class="hourly-weather 1">
+        <p class="time">${futureHoursArr[0]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[0].temperatureF} <span>°</span></p>
+        <p class="description">${futureArr[0].weather} </p>
+      </div>
+  
+      <div class="hourly-weather 2">
+        <p class="time">${futureHoursArr[1]}</p>
+        <img class="symbol"></i>
+        <p class="temp">${futureArr[1].temperatureF} <span>°</span></p>
+        <p class="description">${futureArr[1].weather}</p>
+      </div>
+  
+      <div class="hourly-weather 3">
+        <p class="time">${futureHoursArr[2]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[2].temperatureF} <span>°</span></p>
+        <p class="description">${futureArr[2].weather} </p>
+      </div>
+  
+      <div class="hourly-weather 4">
+        <p class="time">${futureHoursArr[3]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[3].temperatureF} <span>°</span></p>
+        <p class="description">${futureArr[3].weather} </p>
+      </div>
+  
+    </div>
+   
+  
+     <div class="expandBtn expand">
+      <img class="expand toggle" src="" alt="">
+     </div>
+  
+
+    `;
+
+    weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `hidden`;
+    weatherCard.insertAdjacentHTML(`beforeend`, htmlText);
+
+    const currentIcon = document.querySelector(`.current-weather img`);
+    currentIcon.style.content = `url(${currentObj.icon})`;
+
+    const futureIcons = document.querySelectorAll(
+      `.future-weather .hourly-weather img`
+    );
+
+    futureIcons.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
+
+    const futureIconsTable = document.querySelectorAll(
+      `.future-weather-table .hourly-weather img`
+    );
+
+    futureIconsTable.forEach(
+      (icon, i) => (icon.style.content = `url(${futureArr[i].icon})`)
+    );
+
+    renderBackgroundImg(currentObj.code, weatherCard);
+  } catch (error) {
+    let htmlTextError = ` <div class="error-card ">
+    <img src="" alt="" />
+    <h2>A mystery land is waiting us to explore...</h2>
+    <h2>Please try again</h2>
+  </div>`;
+
+    weatherCard.innerHTML = ``;
+    weatherCard.style.overflow = `visible`;
+    weatherCard.style.backgroundImage = `none`;
+
+    weatherCard.insertAdjacentHTML(`beforeend`, htmlTextError);
+  }
+}
+
+async function renderWeatherCardCExpand(current, future, futureHours) {
+  try {
+    let htmlText = ``;
+    const currentObj = await current;
+    const futureArr = await future;
+    const futureHoursArr = await futureHours;
+
+    htmlText = `
+   
+        
+    <div class="location">
+      <img src="" alt="">
+      <p>${currentObj.city}</p>
+    </div>
+  
+   <div class="update-time">
+    Updated at ${currentObj.updateTime}
+    <input type="checkbox" checked="false" name="" class="toggle-1">
+   </div>
+  
+  
+    <div class="current-weather expand">
+      <img src="" alt="" class="weather-symbol" />
+      <p class="temp">${currentObj.temp}
+        <span class="temp-unit">°F</span>
+      </p>
+  
+      <div class="feels-condition">
+        <p class="feels">Feels ${currentObj.feelsLike} </p>
+        <p class="weather-condition">${currentObj.weather}</p>
+  
+      </div>
+      
+    </div>
+  
+    <div class="detailed-weather ">
+      <div class="wind">
+        <p class="value">${currentObj.wind} <span>km/h</span></p>
+        <p class="name">WIND</p>
+      </div>
+  
+      <div class="gust">
+        <p class="value" >${currentObj.gust} <span>km/h</span></p>
+        <p class="name">WIND GUST</p>
+      </div>
+  
+      <div class="humidity">
+        <p class="value">${currentObj.humidity} <span>%</span></p>
+        <p class="name">HUMIDITY</p>
+      </div>
+    </div>
+  
+  
+    <div class="future-weather hidden">
+      <div class="hourly-weather 1">
+        <p class="time">${futureHoursArr[0]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[0].temperature}
+            <span>°</span>
+          </p>
+        </div>
+        <p class="feels">Feels ${futureArr[0].feelsLike}</p>
+      </div>
+  
+      <div class="hourly-weather 2">
+        <p class="time">${futureHoursArr[1]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[1].temperature}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[1].feelsLike}</p>
+      </div>
+  
+      <div class="hourly-weather 3">
+        <p class="time">${futureHoursArr[2]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[2].temperature}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[2].feelsLike}</p>
+      </div>
+  
+      <div class="hourly-weather 4">
+        <p class="time">${futureHoursArr[3]}</p>
+        <div class="weather-temp">
+          <img class="weather-symbol"></img>
+          <p class="temp">${futureArr[3].temperature}
+            <span>°</span>
+          </p>
+        </div>
+      
+        <p class="feels">Feels ${futureArr[3].feelsLike}</p>
+      </div>
+    </div>
+  
+    <div class="future-weather-table   
+  ">
+      <div class="hourly-weather 1">
+        <p class="time">${futureHoursArr[0]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[0].temperature} <span>°</span></p>
+        <p class="description">${futureArr[0].weather} </p>
+      </div>
+  
+      <div class="hourly-weather 2">
+        <p class="time">${futureHoursArr[1]}</p>
+        <img class="symbol"></i>
+        <p class="temp">${futureArr[1].temperature} <span>°</span></p>
+        <p class="description">${futureArr[1].weather}</p>
+      </div>
+  
+      <div class="hourly-weather 3">
+        <p class="time">${futureHoursArr[2]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[2].temperature} <span>°</span></p>
+        <p class="description">${futureArr[2].weather} </p>
+      </div>
+  
+      <div class="hourly-weather 4">
+        <p class="time">${futureHoursArr[3]}</p>
+        <img class="symbol"></img>
+        <p class="temp">${futureArr[3].temperature} <span>°</span></p>
+        <p class="description">${futureArr[3].weather} </p>
+      </div>
+  
+    </div>
+   
+  
+     <div class="expandBtn expand">
+      <img class="expand toggle" src="" alt="">
      </div>
   
 
