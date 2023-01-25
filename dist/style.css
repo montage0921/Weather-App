@@ -81,7 +81,7 @@ input {
 
 .search-btn img {
   width: 30px;
-  content: url(/dist/assets/search.svg);
+  content: url(dist/assets/search.svg);
   filter: invert(98%) sepia(6%) saturate(0%) hue-rotate(338deg) brightness(114%)
     contrast(100%);
 }
@@ -96,7 +96,7 @@ input {
 }
 
 .error-card img {
-  content: url(/assets/404.png);
+  content: url(dist/assets/404.png);
   zoom: 50%;
 }
 
@@ -202,7 +202,7 @@ input {
 }
 
 .location img {
-  content: url(/dist/assets/location.svg);
+  content: url(dist/assets/location.svg);
   filter: invert(100%) sepia(0%) saturate(21%) hue-rotate(9deg) brightness(105%)
     contrast(105%);
 
@@ -372,7 +372,7 @@ input {
 }
 
 .expandBtn img {
-  content: url(/dist/assets/expand.svg);
+  content: url(dist/assets/expand.svg);
   filter: invert(100%) sepia(0%) saturate(284%) hue-rotate(178deg)
     brightness(117%) contrast(92%);
 
