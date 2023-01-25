@@ -96,7 +96,7 @@ input {
 }
 
 .error-card img {
-  content: url(/dist/assets/404.png);
+  content: url(/assets/404.png);
   zoom: 50%;
 }
 
@@ -227,7 +227,7 @@ input {
   padding-left: 20px;
   grid-row: 1/3;
   grid-column: 1/2;
-  content: url(/dist/assets/sunny-test.svg);
+
   align-self: center;
 }
 
@@ -316,7 +316,6 @@ input {
 }
 
 .hourly-weather .weather-temp .weather-symbol {
-  content: url(/dist/assets/sunny-test.svg);
   width: 30px;
   height: auto;
 }
@@ -352,7 +351,6 @@ input {
 }
 
 .future-weather-table img {
-  content: url(/dist/assets/sunny-test.svg);
   height: 38px;
 }
 
