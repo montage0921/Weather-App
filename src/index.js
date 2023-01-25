@@ -1,4 +1,4 @@
-import "./style.css";
+// import "./style.css";
 import renderBackgroundImg from "./renderBackground";
 import { te } from "date-fns/locale";
 
